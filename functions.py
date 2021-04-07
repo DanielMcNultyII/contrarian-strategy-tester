@@ -162,7 +162,9 @@ def yrly_sum_stat_tbl_fmt(df):
             }
         ],
         style_as_list_view=True,
+        page_size=20,
         export_format='csv',
+        style_table={'overflowX': 'auto'}
     )
 
 
