@@ -1,0 +1,40 @@
+/* Style the header */
+.header {
+  background-color: #cccccc;
+  text-align: center;
+}
+
+/* Create three equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 25%;
+  padding: 1%;
+}
+
+.column2 {
+  float: left;
+  width: 70%;
+  padding: 1%;
+}
+
+/* Style the footer */
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+}
+
+button{
+    margin: 20px;
+}
+
+button:hover {
+  background-color: #3cb371
+}
+
+/* Responsive layout - makes the columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
