@@ -1,0 +1,10 @@
+dash
+dash_table
+dash_core_components
+dash_html_components
+datetime
+dateutil
+pandas
+numpy
+yfinance
+plotly
