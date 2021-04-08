@@ -15,7 +15,6 @@ from functions import daily_return, contrarian_portfolio_ret, contrarian_portfol
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = dash.Dash(__name__, prevent_initial_callbacks=True, external_stylesheets=external_stylesheets)
 
-
 app.layout = html.Div(children=[
              html.Div(className='header', children=[
                  html.H1('Contrarian Strategy Tester', style={'margin': '0%'})]
@@ -65,6 +64,9 @@ app.layout = html.Div(children=[
                  ], type='circle')],
                  )
              ])
+
+
+server = app.server
 
 
 @app.callback(
