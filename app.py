@@ -48,11 +48,11 @@ app.layout = html.Div(children=[
                  html.H3('Summary Statistics'),
                  dcc.Loading(id='load-stats', children=[html.Div(id='summary-stats')], type='circle'
                  ),
-                 html.H3('Historic Portfolio Returns'),
+                 html.H3('Historic Strategy Returns'),
                  dcc.Loading(id='load-graph', children=[
                          dcc.Tabs([
-                             dcc.Tab(label='Daily Stock Returns', children=[dcc.Graph(id='dret_graph')]),
-                             dcc.Tab(label='Annualized Daily Stock Returns and Standard Deviations of Daily Stock Returns',
+                             dcc.Tab(label='Daily Strategy Returns', children=[dcc.Graph(id='dret_graph')]),
+                             dcc.Tab(label='Annualized Daily Strategy Returns and Standard Deviations of Daily Strategy Returns',
                                      children=[dcc.Graph(id='ann_graph')]),
                      ])], type='circle'),
                  html.H3('Historical Data'),
@@ -60,7 +60,7 @@ app.layout = html.Div(children=[
                      dcc.Tabs([
                          dcc.Tab(label='Daily Stock Returns', id='dret'),
                          dcc.Tab(label='Pearson Correlations of Daily Stock Returns', id='retcorr'),
-                         dcc.Tab(label='Daily Weights, Collateral, and Portfolio Returns', id='dwcr'),
+                         dcc.Tab(label='Daily Weights, Collateral, and Strategy Returns', id='dwcr'),
                          dcc.Tab(label='Summary Statistics by Year', id='ssby')
                      ])
                  ], type='circle')],

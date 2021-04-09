@@ -208,7 +208,7 @@ def contrarian_portfolio_ret(daily_ret):
 
 def lin_plt(sel_hist):
     lin_cht = go.Figure(data=[go.Scatter(x=sel_hist.Date, y=sel_hist['Portfolio Daily Return'],
-                                         name='Portfolio Daily Return', line={'color': 'blue'}, showlegend=True)])
+                                         name='Daily Strategy Return', line={'color': 'blue'}, showlegend=True)])
 
     lin_cht.add_hline(y=0, line={'color': 'black'})
 
@@ -231,10 +231,10 @@ def lin_plt(sel_hist):
 
 def ann_plt(sel_sum):
     fig = go.Figure(data=[go.Scatter(x=sel_sum.Date, y=sel_sum['Annualized Standard Deviation of Daily Returns'],
-                                     name='Annualized Standard Deviation of Daily Returns', line={'color': 'red'},
+                                     name='Annualized Standard Deviation of Daily Strategy Returns', line={'color': 'red'},
                                      showlegend=True)])
 
-    fig.add_bar(x=sel_sum.Date, y=sel_sum['Annualized Average Daily Return'], name='Annualized Average Daily Return',
+    fig.add_bar(x=sel_sum.Date, y=sel_sum['Annualized Average Daily Return'], name='Annualized Average Daily Strategy Return',
                 marker={'color': 'blue'}, showlegend=True)
 
     fig.add_hline(y=0, line={'color': 'black'})
