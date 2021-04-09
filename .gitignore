@@ -1,5 +1,4 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-.vscode
-__pycashe___
+venv
+*.pyc
+.DS_Store
+.env
