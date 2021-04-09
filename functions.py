@@ -52,13 +52,13 @@ def contrarian_portfolio_tbl_fmt(df):
             style_data_conditional=[
                 {
                     'if': {
-                        'filter_query': '{{Portfolio Daily Return}} < {}'.format(0.00),
+                        'filter_query': '{{Strategy Daily Return}} < {}'.format(0.00),
                     },
                     'backgroundColor': '#FF4136',
                 },
                 {
                     'if': {
-                        'filter_query': '{{Portfolio Daily Return}} > {}'.format(0.00),
+                        'filter_query': '{{Strategy Daily Return}} > {}'.format(0.00),
                     },
                     'backgroundColor': '#3cb371',
                 },
@@ -192,7 +192,7 @@ def contrarian_portfolio_ret(daily_ret):
 
     results_df = weights
     results_df['Collateral Needed'] = collateral
-    results_df['Portfolio Daily Return'] = strat_ret
+    results_df['Strategy Daily Return'] = strat_ret
 
     daily_ret = daily_ret.reset_index()
     daily_ret['Date'] = daily_ret['Date'].dt.date
@@ -207,7 +207,7 @@ def contrarian_portfolio_ret(daily_ret):
 
 
 def lin_plt(sel_hist):
-    lin_cht = go.Figure(data=[go.Scatter(x=sel_hist.Date, y=sel_hist['Portfolio Daily Return'],
+    lin_cht = go.Figure(data=[go.Scatter(x=sel_hist.Date, y=sel_hist['Strategy Daily Return'],
                                          name='Daily Strategy Return', line={'color': 'blue'}, showlegend=True)])
 
     lin_cht.add_hline(y=0, line={'color': 'black'})
@@ -257,8 +257,8 @@ def ann_plt(sel_sum):
 
 def summary_stats(sel_hist, trading_days):
     trading_days = float(trading_days)
-    avg_daily_ret = np.average(sel_hist['Portfolio Daily Return'])
-    std_dev_daily_ret = np.std(sel_hist['Portfolio Daily Return'], ddof=1)
+    avg_daily_ret = np.average(sel_hist['Strategy Daily Return'])
+    std_dev_daily_ret = np.std(sel_hist['Strategy Daily Return'], ddof=1)
 
     sum_stats = pd.DataFrame({'Average Daily Return': [avg_daily_ret],
                               'Standard Deviation of Daily Returns': [std_dev_daily_ret],
@@ -272,7 +272,7 @@ def summary_stats(sel_hist, trading_days):
 def yearly_summaries(sel_hist, trading_days):
     trading_days = float(trading_days)
     sel_hist['Date'] = pd.to_datetime(sel_hist['Date'])
-    yr_groups = sel_hist['Portfolio Daily Return'].groupby(sel_hist['Date'].dt.year)
+    yr_groups = sel_hist['Strategy Daily Return'].groupby(sel_hist['Date'].dt.year)
     sum_stats = pd.DataFrame({'Date': yr_groups.mean().index,
                               'Average Daily Return': yr_groups.mean(),
                               'Standard Deviation of Daily Returns': yr_groups.std(ddof=1)})
