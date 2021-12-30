@@ -3,8 +3,7 @@
 
 import os
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from datetime import datetime
@@ -100,4 +99,4 @@ def update_dashboard(click, ticker_list, start_date, end_date, trading_days):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    app.run_server(debug=True, use_reloader=False)
+    app.run_server(debug=False, use_reloader=False)

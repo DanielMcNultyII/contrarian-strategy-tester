@@ -4,7 +4,7 @@
 import pandas as pd
 import numpy as np
 import yfinance as yf
-from dash_table import DataTable, FormatTemplate
+from dash.dash_table import DataTable, FormatTemplate
 import plotly.graph_objs as go
 
 
