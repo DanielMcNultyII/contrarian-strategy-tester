@@ -41,7 +41,7 @@ app.layout = html.Div(children=[
                  ),
                  html.H5('Trading Days per Year'),
                  dcc.Input(id='trading_days', style={'display': 'block'}),
-                 dbc.Button("Run Contrarian Strategy", id='run', outline=True, block=True),
+                 dbc.Button("Run Contrarian Strategy", id='run', outline=True),
              ]
              ),
              html.Div(className='column2', children=[
