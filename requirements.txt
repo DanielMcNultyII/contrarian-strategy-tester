@@ -4,10 +4,8 @@ certifi==2020.12.5
 chardet==4.0.0
 click==7.1.2
 cycler==0.10.0
-dash==1.19.0
-dash-bootstrap-components==0.12.0
-dash-core-components==1.15.0
-dash-html-components==1.1.2
+dash==2.0.0
+dash-bootstrap-components==1.0.2
 dash-renderer==1.9.0
 dash-table==4.11.2
 DateTime==4.3
@@ -42,6 +40,6 @@ urllib3==1.26.4
 virtualenv==20.4.3
 virtualenv-clone==0.5.4
 Werkzeug==1.0.1
-yfinance==0.1.59
+yfinance==0.1.67
 zipp==3.4.1
 zope.interface==5.3.0
