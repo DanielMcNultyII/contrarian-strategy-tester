@@ -10,6 +10,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from functions import daily_return, contrarian_portfolio_ret, contrarian_portfolio_tbl_fmt, lin_plt, summary_stats, \
                       sum_stat_tbl_fmt, generic_tbl_fmt, yearly_summaries, yrly_sum_stat_tbl_fmt, ann_plt
+import math
 
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
@@ -40,7 +41,7 @@ app.layout = html.Div(children=[
                  ),
                  html.H5('Trading Days per Year'),
                  dcc.Input(id='trading_days', style={'display': 'block'}),
-                 dbc.Button("Run Contrarian Strategy", id='run', outline=True),
+                 dbc.Button("Run Contrarian Strategy", id='run', outline=True)
              ]
              ),
              html.Div(className='column2', children=[
@@ -82,21 +83,39 @@ app.layout = html.Div(children=[
      State(component_id='trading_days', component_property='value')]
 )
 def update_dashboard(click, ticker_list, start_date, end_date, trading_days):
-    dr = daily_return(str(ticker_list).replace(' ', '').split(','), start_date, end_date)
-    res_wts_ret = contrarian_portfolio_ret(dr)
-    sum_stats = summary_stats(res_wts_ret[2], trading_days)
-    yrly_sum_stats = yearly_summaries(res_wts_ret[2], trading_days)
+    try:
+        ticks = str(ticker_list).replace(' ', '').split(',')
+        if len(ticks) <= 1:
+            raise Exception('ERROR - More than 1 ticker must be used')
 
-    res_wts_ret[2]['Date'] = res_wts_ret[2]['Date'].dt.date
+        dr = daily_return(ticks, start_date, end_date)
+        ret_test = {l: all(math.isnan(i) for i in dr[l]) for l in ticks}
+        if True in ret_test.values():
+            ticks_missing_data = [i for i in ret_test if ret_test[i] is True]
+            raise ValueError('ERROR - Missing or incomplete data found for the following tickers: ' + \
+                             str(ticks_missing_data).replace('[', '').replace(']', '').replace("'",''))
 
-    dcorr = dr.corr(method = 'pearson', min_periods = 1).reset_index()
-    dcorr = dcorr.rename(columns = {'index': ''})
+        res_wts_ret = contrarian_portfolio_ret(dr)
+        sum_stats = summary_stats(res_wts_ret[2], trading_days)
+        yrly_sum_stats = yearly_summaries(res_wts_ret[2], trading_days)
 
-    return [sum_stat_tbl_fmt(sum_stats)], lin_plt(res_wts_ret[2]), ann_plt(yrly_sum_stats), \
-           [generic_tbl_fmt(res_wts_ret[0])], [generic_tbl_fmt(dcorr)], \
-           [contrarian_portfolio_tbl_fmt(res_wts_ret[2])], [yrly_sum_stat_tbl_fmt(yrly_sum_stats)]
+        res_wts_ret[2]['Date'] = res_wts_ret[2]['Date'].dt.date
+
+        dcorr = dr.corr(method = 'pearson', min_periods = 1).reset_index()
+        dcorr = dcorr.rename(columns = {'index': ''})
+
+        return [sum_stat_tbl_fmt(sum_stats)], lin_plt(res_wts_ret[2]), ann_plt(yrly_sum_stats), \
+               [generic_tbl_fmt(res_wts_ret[0])], [generic_tbl_fmt(dcorr)], \
+               [contrarian_portfolio_tbl_fmt(res_wts_ret[2])], [yrly_sum_stat_tbl_fmt(yrly_sum_stats)]
+
+    except Exception as e:
+        return [str(e)], {}, {}, \
+               [str(e)], \
+               [str(e)], \
+               [str(e)], \
+               [str(e)]
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    app.run_server(debug=False, use_reloader=False)
+    app.run_server(debug=True, use_reloader=False)
