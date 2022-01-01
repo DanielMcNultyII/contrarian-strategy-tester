@@ -133,7 +133,7 @@ def update_dashboard(click, ticker_list, start_date, end_date, trading_days):
             ticks_missing_data = [i for i in ret_test if ret_test[i] is True]
             raise ValueError('ERROR - Missing or incomplete data found for the following tickers: ' + \
                              str(ticks_missing_data).replace('[', '').replace(']', '').replace("'",'') + \
-                             '. Please confirm the tickers existed for all dates in the date range specified and try again.')
+                             '. Please confirm these tickers existed for all dates in the date range specified and try again.')
 
         # Run the contrarian strategy using the daily returns collected and stored into dr.
         res_wts_ret = contrarian_portfolio_ret(dr)
