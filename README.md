@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Contrarian Strategy Tester
 
 This dashboard runs a basic mean reversion contrarian trading strategy
